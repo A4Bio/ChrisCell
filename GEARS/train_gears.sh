@@ -1,0 +1,6 @@
+CUDA_VISIBLE_DEVICES=0 nohup python train.py --data_name norman --batch_size 6 --accumulation_steps 5 --lr 5e-4 --epochs 5 --model_type 'maeautobin' --result_dir ./results/best_norman > results/norman/train6.log & 
+# CUDA_VISIBLE_DEVICES=1 nohup python train.py --data_name norman --batch_size 6 --accumulation_steps 5 --lr 5e-4 --epochs 5 --model_type 'maeautobin' --result_dir ./results/norman4 > results/norman/train4.log &
+# CUDA_VISIBLE_DEVICES=2 nohup python train.py --data_name dixit --batch_size 6 --accumulation_steps 5 --lr 5e-4 --epochs 5 --model_type 'maeautobin' --result_dir ./results/dixit8 > results/dixit/train8.log &
+# CUDA_VISIBLE_DEVICES=3 nohup python train.py --data_name adamson --batch_size 6 --accumulation_steps 8 --lr 5e-4 --epochs 5 --model_type 'maeautobin' --result_dir ./results/adamson5 > results/adamson/train5.log & 
+# CUDA_VISIBLE_DEVICES=4 nohup python train.py --data_name norman --batch_size 6 --accumulation_steps 8 --lr 5e-4 --epochs 5 --model_type 'maeautobin' --result_dir ./results/norman5 > results/norman/train5.log &
+# CUDA_VISIBLE_DEVICES=5 nohup python train.py --data_name dixit --batch_size 6 --accumulation_steps 8 --lr 5e-4 --epochs 5 --model_type 'maeautobin' --result_dir ./results/dixit9 > results/dixit/train9.log & 
