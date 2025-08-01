@@ -45,7 +45,6 @@ def main(parser):
     gears_model.load_pretrained('results/norman/')
 
     gears_model.plot_perturbation('', './pert.pdf')
-#    gears_model.train(epochs = args.epochs, result_dir=args.result_dir,lr=args.lr)
 
     # save model
     gears_model.save_model(args.result_dir)

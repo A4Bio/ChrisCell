@@ -53,7 +53,7 @@ To get started with ChrisCell, follow these steps:
 
 3. **Download the pretrained Model**:
 
-    We provide a pretrained model for ChrisCell. [Download it here](https://github.com/A4Bio/ChrisCell/releases/download/checkpoint/checkpoint.pt) and place it in the pretrained_models directory. We also provide the test data in [Download it here](https://doi.org/10.6084/m9.figshare.28787489.v1）.
+    We provide a pretrained model for ChrisCell. [Download it here](https://drive.google.com/file/d/1ksikFnld6Lt7m2Joijc6Y3B0HNx10L06/view?usp=sharing) and place it in the pretrained_models directory. We also provide the test data in [Download it here](https://doi.org/10.6084/m9.figshare.28787489.v1）.
 
 4. **Download the pretraining dataset**:
    To download the pretraining dataset, users can refer to the [link.](https://github.com/bowang-lab/scGPT.git)
