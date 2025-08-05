@@ -140,8 +140,6 @@ class MaeAutobin(nn.Module):
         b, n, device = *x.shape, x.device
         assert n <= self.max_seq_len, f'sequence length {n} must be less than the max sequence length {self.max_seq_len}'
 
-       # with torch.no_grad():
-        # token and positional embedding
         x = self.token_emb(torch.unsqueeze(x, 2), output_weight = 0)
         if output_attentions:
             x.requires_grad_()  # used for attn_map output
@@ -154,19 +152,6 @@ class MaeAutobin(nn.Module):
         x += position_emb
         x += grn_emb
         x = self.encoder(x, padding_mask=padding_label)
-
-        # decoder_data = self.token_emb(torch.unsqueeze(decoder_data, 2))
-        # position_emb = self.pos_emb(decoder_position_gene_ids)
-
-        # batch_idx, gen_idx = (encoder_labels == True).nonzero(as_tuple=True)
-        # decoder_data[batch_idx, gen_idx] = x[~padding_label].to(decoder_data.dtype)
-
-        # decoder_data += position_emb
-        # decoder_data += self.grn_embed(self.grn)
-
-        # decoder_data = self.decoder_embed(decoder_data)
-        # x = self.decoder(decoder_data, padding_mask=decoder_data_padding_labels)
-        # x = self.norm(x)
 
         return x
     

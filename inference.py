@@ -18,6 +18,7 @@ parser.add_argument('--data_path', type=str, default='./examples/cluster_19264.h
 parser.add_argument('--save_path', type=str, default='./results/example_output.pth', help='save path')
 parser.add_argument('--pre_normalized', type=bool, default=False, help='if normalized before input; default: False (F). choice: True(T), Append(A) When input_type=bulk: pre_normalized=T means log10(sum of gene expression). pre_normalized=F means sum of gene expression without normalization. When input_type=singlecell: pre_normalized=T or F means gene expression is already normalized+log1p or not. pre_normalized=A means gene expression is normalized and log1p transformed. the total count is appended to the end of the gene expression matrix.')
 parser.add_argument('--mode',  type=str, default='m1')
+parser.add_argument('--device',  type=str, default='cuda')
 parser.add_argument('--model_path',  type=str, default='./model/models/models.ckpt', help='pre-trained model path')
 
 args = parser.parse_args()
@@ -35,7 +36,7 @@ def get_cellemb(geneemb, pool_type='max'):
         raise ValueError('pool_type must be all or max')
     return geneembmerge
 
-def inference(path, device, pretrainmodel):
+def inference(path, device, pretrainmodel, config):
 
     gexpr_feature = sc.read(path).X.toarray() if path.endswith('.h5ad') else np.load(path)
     cellembs=[]
@@ -61,7 +62,7 @@ def inference(path, device, pretrainmodel):
                 totalcount = gexpr_feature[i,:].sum()
                 pretrain_gene_x = torch.tensor(tmpdata+[4.0,np.log10(totalcount)]).unsqueeze(0).to(device)
 
-            encoder_data, encoder_position_gene_ids, encoder_data_padding, encoder_labels, decoder_data, decoder_data_padding, new_data_raw, data_mask_labels, decoder_position_gene_ids = getEncoerDecoderData(pretrain_gene_x.float(),pretrain_gene_x.float(),pretrainconfig)
+            encoder_data, encoder_position_gene_ids, encoder_data_padding, encoder_labels, decoder_data, decoder_data_padding, new_data_raw, data_mask_labels, decoder_position_gene_ids = getEncoerDecoderData(pretrain_gene_x.float(),pretrain_gene_x.float(),config)
             x, cell_code, _ = pretrainmodel.get_cellcode(x=encoder_data, 
                                             padding_label=encoder_data_padding, 
                                             encoder_position_gene_ids=encoder_position_gene_ids, 
@@ -79,15 +80,15 @@ def main():
 
     torch.manual_seed(0)
     torch.cuda.manual_seed_all(0)
-    device = torch.device('cuda:0')
+    device = torch.device(args.device)
 
     ckpt_path = args.model_path
         
-    pretrainmodel, pretrainconfig = load_model_frommmf(ckpt_path,args.mode, device=device)
+    pretrainmodel, config = load_model_frommmf(ckpt_path,args.mode, device=device)
     pretrainmodel.eval()
 
     file = args.data_path
-    inference(file, device, pretrainmodel)
+    inference(file, device, pretrainmodel, config)
 
 if __name__=='__main__':
     main()

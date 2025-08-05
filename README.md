@@ -67,7 +67,7 @@ To quickly try out ChrisCell using an example dataset, run the following command
 bash run_example.sh
 ```
 
-This script runs the `inference.py` script with sample data provided in the `examples` folder. It uses a sample density map and a ground truth PDB file for evaluation.
+This script runs the `inference.py` script with sample data provided in the `examples` folder. 
 
 We also provide an example tutorial in `quick_start.ipynb`.
 
