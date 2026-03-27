@@ -3,7 +3,7 @@
 CellVQ is a comprehensive and interpretable single-cell foundation model. CellVQ innovatively integrates a Single-Cell Discretization (SCD) module into the single-cell foundation model. This module utilizes a unified cell codebook to transform the cell representation into a cell code and uses an SCD cell embedding derived from the cell codebook to represent the cell corresponding to the code. CellVQ employs an encoder-SCD-decoder architecture, encompassing 511 million parameters and pretrained on over 68 million single-cell data points.
 
 <p align="center" width="100%">
-  <img src='./imgs/ChrisCell.png' width="100%">
+  <img src='./imgs/chriscell.png' width="100%">
 </p>
 
 ## Table of Contents
